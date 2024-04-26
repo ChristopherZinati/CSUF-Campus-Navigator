@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Navigator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Campus Navigator</h1>
+    <label for="origin">Select Origin:</label>
+    <select id="origin">
+        <option value="A">Titan Student Union</option>
+        <option value="B">State College Parking Structure</option>
+        <option value="C">Pollack Library</option>
+        <option value="D">Clayes Performing Arts Center</option>
+    </select>
+    <br>
+    <label for="destination">Select Destination:</label>
+    <select id="destination">
+        <option value="A">Titan Student Union</option>
+        <option value="B">State College Parking Structure</option>
+        <option value="C">Pollack Library</option>
+        <option value="D">Clayes Performing Arts Center</option>
+    </select>
+    <br>
+    <button onclick="startRouting()">Start Routing</button>
+    <br>
+    <h2>Shortest Path:</h2>
+    <div id="path-result">
+        <ul id="shortestPath"></ul>
+    </div>
+
+    <script src="NavigatorBackend.js"></script>
+    <script>
+        function startRouting() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const result = dijkstra(graph, origin, destination);
+            const shortestPathElement = document.getElementById('shortestPath');
+            const pathResultElement = document.getElementById('path-result'); // New
+            shortestPathElement.innerHTML = '';
+            pathResultElement.innerHTML = ''; // Clear previous content
+            if (result.distance !== Infinity) {
+                result.path.forEach(place => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = place;
+                    shortestPathElement.appendChild(listItem);
+                });
+                shortestPathElement.innerHTML += `<li>Total distance: ${result.distance}</li>`;
+            } else {
+                pathResultElement.innerHTML = '<p>No path found.</p>'; // Update the message
+            }
+        }
+    </script>
+</body>
+</html>
