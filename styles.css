@@ -47,6 +47,8 @@ ul {
     list-style-type: none;
     padding: 0;
     text-align: center; /* Center the text */
+    margin: 0 auto; /* Center the list */
+    max-width: 600px; /* Limit the maximum width */
 }
 
 li {

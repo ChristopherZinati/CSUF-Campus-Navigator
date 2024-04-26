@@ -27,9 +27,7 @@
     <button onclick="startRouting()">Start Routing</button>
     <br>
     <h2>Shortest Path:</h2>
-    <div id="path-result">
-        <ul id="shortestPath"></ul>
-    </div>
+    <ul id="shortestPath"></ul>
 
     <script src="NavigatorBackend.js"></script>
     <script>
@@ -38,9 +36,7 @@
             const destination = document.getElementById('destination').value;
             const result = dijkstra(graph, origin, destination);
             const shortestPathElement = document.getElementById('shortestPath');
-            const pathResultElement = document.getElementById('path-result'); // New
             shortestPathElement.innerHTML = '';
-            pathResultElement.innerHTML = ''; // Clear previous content
             if (result.distance !== Infinity) {
                 result.path.forEach(place => {
                     const listItem = document.createElement('li');
@@ -49,7 +45,7 @@
                 });
                 shortestPathElement.innerHTML += `<li>Total distance: ${result.distance}</li>`;
             } else {
-                pathResultElement.innerHTML = '<p>No path found.</p>'; // Update the message
+                shortestPathElement.innerHTML = '<li>No path found.</li>';
             }
         }
     </script>

@@ -82,6 +82,6 @@ function dijkstra(graph, origin, dest){
 const sourceNode = 'A';
 const destinationNode = 'C';
 
-const result = dijkstra(graph, places, sourceNode, destinationNode);
+const result = dijkstra(graph, sourceNode, destinationNode);
 console.log(`Shortest path from ${places[sourceNode]} to ${places[destinationNode]}:`, result.path);
 console.log(`Total distance: ${result.distance}`);
