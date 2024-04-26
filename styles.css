@@ -1,5 +1,8 @@
+/* styles.css */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
+    background-color: #817f75;
     margin: 0;
     padding: 0;
 }
@@ -8,13 +11,14 @@ body {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
     border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
+    color: #000000;
     text-align: center;
 }
 
@@ -58,4 +62,21 @@ li {
 
 li:last-child {
     margin-bottom: 0;
+}
+
+
+.image-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensure that the image doesn't overflow its container */
+}
+
+.campus-image {
+    width: auto; /* Let the width adjust automatically */
+    height: 100%; /* Set the height to 100% to fill its container */
+    max-width: none; /* Remove the maximum width constraint */
+    max-height: none; /* Remove the maximum height constraint */
+    object-fit: contain; /* Maintain aspect ratio */
 }
