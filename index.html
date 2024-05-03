@@ -38,9 +38,10 @@
                 <div class="container">
                     <h1 class="mt-5 mb-4 text-center">Campus Navigator</h1>
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="origin" class="form-label">Select Origin:</label>
                             <select id="origin" class="form-select">
+                                <!-- Retain all options for selecting origin -->
                                 <option value="A">Parking Lot A</option>
                                 <option value="B">Parking Lot G</option>
                                 <option value="C">Titan Stadium/Goodwin Field</option>
@@ -64,9 +65,10 @@
                                 <option value="U">Humanities/Social Sciences</option>
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="destination" class="form-label">Select Destination:</label>
                             <select id="destination" class="form-select">
+                                <!-- Retain all options for selecting destination -->
                                 <option value="A">Parking Lot A</option>
                                 <option value="B">Parking Lot G</option>
                                 <option value="C">Titan Stadium/Goodwin Field</option>
@@ -88,6 +90,14 @@
                                 <option value="S">Mihaylo Hall</option>
                                 <option value="T">Nutwood Parking Structure</option>
                                 <option value="U">Humanities/Social Sciences</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="algorithm" class="form-label">Select Algorithm:</label>
+                            <select id="algorithm" class="form-select">
+                                <option value="dijkstra">Dijkstra's Algorithm</option>
+                                <option value="bfs">Breadth-First Search (BFS)</option>
+                                <option value="dfs">Depth-First Search (DFS)</option>
                             </select>
                         </div>
                     </div>
@@ -109,17 +119,33 @@
         function startRouting() {
             const origin = document.getElementById('origin').value;
             const destination = document.getElementById('destination').value;
-            let [x, y] = dijkstra(graph, origin, destination);
-            result = x;
+            const algorithm = document.getElementById('algorithm').value;
+
+            let result, runtime;
+            switch (algorithm) {
+                case 'dijkstra':
+                    [result, runtime] = dijkstra(graph, origin, destination);
+                    break;
+                case 'bfs':
+                    [result, runtime] = bfs(graph, origin, destination);
+                    break;
+                case 'dfs':
+                    [result, runtime] = dfs(graph, origin, destination);
+                    break;
+                default:
+                    console.error('Invalid algorithm selected.');
+            }
+
             const shortestPathElement = document.getElementById('shortestPath');
             shortestPathElement.innerHTML = '';
-            if (result.distance !== Infinity) {
+            if (result !== null) {
                 result.path.forEach(place => {
                     const listItem = document.createElement('li');
                     listItem.textContent = place;
                     shortestPathElement.appendChild(listItem);
                 });
                 shortestPathElement.innerHTML += `<li>Total distance: ${result.distance}</li>`;
+                shortestPathElement.innerHTML += `<li>Algorithm runtime: ${runtime} ms</li>`;
             } else {
                 shortestPathElement.innerHTML = '<li>No path found.</li>';
             }
