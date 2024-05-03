@@ -45,6 +45,27 @@ const places = {
     'T' : 'Nutwood Parking Structure',
     'U' : 'Humanities/Social Sciences'
 }
+//allows for runtime calculation
+class RuntimeCalculator{
+    constructor(){
+        this.startTime = 0;
+        this.endTime = 0;
+    }
+    start(){
+        this.startTime = performance.now();
+    }
+    stop(){
+        this.endTime = performance.now()
+    }
+    getRuntime(){
+        if(this.startTime == 0 || this.endTime == 0){
+            return null;
+        } else {
+            return this.endTime - this.startTime;
+        }
+    }
+}
+
 
 //for priority queue functionality
 class PriorityQueue {
@@ -71,6 +92,9 @@ class PriorityQueue {
 }
 
 function dijkstra(graph, origin, dest){
+    const dRuntime = new RuntimeCalculator();
+    dRuntime.start();
+
     const distances = {};
     const previous = {};
     const pq = new PriorityQueue ();
@@ -110,6 +134,6 @@ function dijkstra(graph, origin, dest){
         path : shortestPathNodes.map(node => places[node]),
         distance : distances[dest]
     };
-
-    return shortestPath;
+    dRuntime.stop();
+    return [shortestPath, dRuntime.getRuntime()];
 }

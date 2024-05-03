@@ -107,7 +107,9 @@
         function startRouting() {
             const origin = document.getElementById('origin').value;
             const destination = document.getElementById('destination').value;
-            const result = dijkstra(graph, origin, destination);
+            //dijkstra returns both path and runtime in [path = x, runtime y], result = x
+            let [x,y] = dijkstra(graph, origin, destination);
+            result = x;
             const shortestPathElement = document.getElementById('shortestPath');
             shortestPathElement.innerHTML = '';
             if (result.distance !== Infinity) {
