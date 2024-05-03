@@ -18,13 +18,15 @@
         }
         .campus-image {
             max-width: 100%;
-            max-height: 300px; /* Adjust the maximum height as needed */
+            max-height: 100%; /* Adjust the maximum height as needed */
+            width: auto;
+            height: auto;
         }
     </style>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row align-items-center justify-content-center">
             <div class="col-md-6">
                 <!-- Image of the campus -->
                 <div class="image-container">
@@ -34,12 +36,12 @@
             <div class="col-md-6">
                 <!-- Content container -->
                 <div class="container">
-                    <h1 class="mt-5 mb-4">Campus Navigator</h1>
+                    <h1 class="mt-5 mb-4 text-center">Campus Navigator</h1>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="origin" class="form-label">Select Origin:</label>
                             <select id="origin" class="form-select">
-                                <option value="A">Parking Lot A </A></option>
+                                <option value="A">Parking Lot A</option>
                                 <option value="B">Parking Lot G</option>
                                 <option value="C">Titan Stadium/Goodwin Field</option>
                                 <option value="D">State College Parking Structure</option>
@@ -65,7 +67,7 @@
                         <div class="col-md-6">
                             <label for="destination" class="form-label">Select Destination:</label>
                             <select id="destination" class="form-select">
-                                <option value="A">Parking Lot A </A></option>
+                                <option value="A">Parking Lot A</option>
                                 <option value="B">Parking Lot G</option>
                                 <option value="C">Titan Stadium/Goodwin Field</option>
                                 <option value="D">State College Parking Structure</option>
@@ -89,10 +91,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mb-4"> <!-- Added mb-4 class for margin bottom -->
+                    <div class="d-flex justify-content-center mb-4">
                         <button onclick="startRouting()" class="btn btn-primary">Start Routing</button>
                     </div>
-                    <h2 class="mb-3">Shortest Path:</h2> <!-- Added mb-3 class for margin bottom -->
+                    <h2 class="mb-3">Shortest Path:</h2>
                     <ul id="shortestPath"></ul>
                 </div>
             </div>
@@ -107,8 +109,7 @@
         function startRouting() {
             const origin = document.getElementById('origin').value;
             const destination = document.getElementById('destination').value;
-            //dijkstra returns both path and runtime in [path = x, runtime y], result = x
-            let [x,y] = dijkstra(graph, origin, destination);
+            let [x, y] = dijkstra(graph, origin, destination);
             result = x;
             const shortestPathElement = document.getElementById('shortestPath');
             shortestPathElement.innerHTML = '';
